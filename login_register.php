@@ -149,6 +149,7 @@ if (isset($_POST['loginBtn'])) {
 
     $_SESSION['auth'] = true;
     $_SESSION['loggedInUser'] = [
+        'user_id' => $user['id'],
         'name' => $user['name'],
         'email' => $user['email'],
         'role' => $user['role']

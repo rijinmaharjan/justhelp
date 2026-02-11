@@ -91,6 +91,7 @@ $sizes = !empty($rowData['size']) ? explode(',', $rowData['size']) : [];
         color: #fff;
     }
 </style>
+
 <form action="cart-code.php" method="POST" class="product-detail">
     <input type="hidden" name="product_id" value="<?= $rowData['id']; ?>">
     <div class="product-right">
