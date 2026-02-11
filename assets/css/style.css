@@ -1,0 +1,18 @@
+:root {
+    --bg: #f7f7f5;
+    --white: #ffffff;
+    --primary: #1f1f1f;
+    --secondary: #6f6f6f;
+    --accent: #7a1e2c;
+    --border: #e5e5e5;
+    --radius: 18px;
+}
+
+.cart-btn {
+    margin: 16px 40px;
+    padding: 13px 51px;
+    border-radius: 11px;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+}

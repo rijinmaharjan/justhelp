@@ -1,0 +1,70 @@
+:root {
+    --bg: #f7f7f5;
+    --white: #ffffff;
+    --primary: #1f1f1f;
+    --secondary: #6f6f6f;
+    --accent: #7a1e2c;
+    --border: #e5e5e5;
+    --radius: 18px;
+}
+
+.second-page-section {
+    padding: 70px;
+        padding-top: 15px
+}
+
+
+.second-page-section h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.second-page-description {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.second-page-container {
+    margin-top: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.circle {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    width: 100%;
+    gap: 50px;
+    margin: 0px 250px;
+}
+
+.item {
+    min-width: 220px;
+    text-align: center;
+    margin-right: 30px;
+}
+
+.item img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.item img:hover {
+    background: var(--secondary);
+    opacity: 40%;
+}
+
+.item span {
+    display: block;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--primary);
+}
