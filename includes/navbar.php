@@ -7,7 +7,7 @@
         <ul id="navbar">
             <li><a href="#">Mens</a></li>
             <li><a href="#">Womens</a></li>
-            <li><a href="#">New Arrivals</a></li>
+            <li><a href="index.php?sort=new">New Arrivals</a></li>
             <li><a href="#">Seasonal</a></li>
             <li>
                 <div class="box">

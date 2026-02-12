@@ -20,7 +20,14 @@ include('includes/header.php'); ?>
         <div class="row">
 
             <?php
-            $productQuery = "SELECT * FROM products WHERE status='0'";
+            $sortBy = $_GET['sort'] ?? '';
+            $orderBy = "";
+
+            if ($sortBy === 'new') {
+                $orderBy = " ORDER BY id DESC";
+            }
+
+            $productQuery = "SELECT * FROM products WHERE status='0'" . $orderBy;
             $result = mysqli_query($conn, $productQuery);
 
             if ($result) {
