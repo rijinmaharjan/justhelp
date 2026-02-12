@@ -1,11 +1,16 @@
 <?php
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_DATABASE', 'clothing');
+if (!defined('DB_SERVER')) {
+    define('DB_SERVER', 'localhost');
+    define('DB_USERNAME', 'root');
+    define('DB_PASSWORD', '123123');
+    define('DB_DATABASE', 'clothing');
+    define('DB_PORT', 3307);
+}
+// define('DB_PORT', 3307);
 
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+// STEP 1: Connect to the server ONLY (Notice the 4th parameter is empty "")
+$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, "", DB_PORT);
 
 if (!$conn) {
     die('Connection Failed: ' . mysqli_connect_error());
