@@ -16,18 +16,7 @@ if (isset($_POST['add_to_cart'])) {
     $size = validate($_POST['size']);
     $quantity = validate($_POST['quantity']);
 
-    // 3. Optional: Auto-create cart table if not exists
-    $createTable = "CREATE TABLE IF NOT EXISTS cart (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        product_id INT NOT NULL,
-        size VARCHAR(50) NOT NULL,
-        quantity INT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )";
-    mysqli_query($conn, $createTable);
-
-    // 4. Check if item already exists in cart for this user
+    // 3. Check if item already exists in cart for this user
     $checkCart = "SELECT * FROM cart WHERE user_id='$userId' AND product_id='$productId' AND size='$size' LIMIT 1";
     $checkCartRes = mysqli_query($conn, $checkCart);
 

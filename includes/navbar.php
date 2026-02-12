@@ -41,30 +41,15 @@
 
             <li>
                 <?php if (isset($_SESSION['auth'])): ?>
-                    <div class="profile-menu-container">
-                        <input type="checkbox" id="profileToggle" class="profile-toggle-checkbox">
-                        <label for="profileToggle" class="profile-btn">
+                    <div class="profile-dropdown">
+                        <button class="profile-btn" type="button" aria-label="Open profile menu">
                             <i class="fa-solid fa-user"></i>
-                            <span class="profile-name"><?= explode(' ', trim($_SESSION['loggedInUser']['name']))[0]; ?></span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </label>
-                        <div class="profile-dropdown">
-                            <a href="profile.php" class="profile-menu-item">
-                                <i class="fa-solid fa-user-circle"></i> My Profile
-                            </a>
-                            <a href="settings.php" class="profile-menu-item">
-                                <i class="fa-solid fa-gear"></i> Settings
-                            </a>
-                            <a href="orders.php" class="profile-menu-item">
-                                <i class="fa-solid fa-receipt"></i> My Orders
-                            </a>
-                            <a href="wishlist.php" class="profile-menu-item">
-                                <i class="fa-solid fa-heart"></i> Wishlist
-                            </a>
-                            <div class="profile-menu-divider"></div>
-                            <a href="logout.php" class="profile-menu-item logout-item">
-                                <i class="fa-solid fa-sign-out-alt"></i> Logout
-                            </a>
+                            <?= explode(' ', trim($_SESSION['loggedInUser']['name']))[0]; ?>
+                            <i class="fa-solid fa-chevron-down profile-chevron"></i>
+                        </button>
+                        <div class="profile-dropdown-menu">
+                            <a href="account-settings.php">Settings</a>
+                            <a href="logout.php">Logout</a>
                         </div>
                     </div>
                 <?php else: ?>
