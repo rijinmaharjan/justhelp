@@ -56,8 +56,8 @@ $activeForm = $_SESSION['active_form'] ?? 'login';
             <form action="login_register.php" method="post">
                 <h2>Login</h2>
                 <?php alertMessage('login'); ?>
-                <input type="email" name="email" required>
-                <input type="password" name="password" required>
+                <input type="text" name="email" placeholder="Username or Email" required>
+                <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="loginBtn">Login</button>
                 <p>Don't have an account?
                     <a href="#" onclick="showForm('register-form')">Register</a>
@@ -70,10 +70,10 @@ $activeForm = $_SESSION['active_form'] ?? 'login';
             <form action="login_register.php" method="post">
                 <h2>Register</h2>
                 <?php alertMessage('register'); ?>
-                <input type="text" name="name" required>
-                <input type="text" name="phone" required>
-                <input type="email" name="email" required>
-                <input type="password" name="password" required>
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="text" name="phone" placeholder="Phone Number" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="password" name="password" placeholder="Create Password" required>
                 <button type="submit" name="register">Register</button>
                 <p>Already have an account?
                     <a href="#" onclick="showForm('login-form')">Login</a>
