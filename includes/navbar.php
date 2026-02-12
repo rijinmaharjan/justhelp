@@ -68,12 +68,30 @@
 
             <li>
                 <?php if (isset($_SESSION['auth'])): ?>
-                    <div class="nav-user-info" style="display: inline-flex; align-items: center; gap: 8px;">
-                        <a href="profile.php" style="color: #7a1e2c; font-weight: 600;">
+                    <div class="profile-menu-container">
+                        <button class="profile-btn" id="profileBtn">
                             <i class="fa-solid fa-user"></i>
-                            <?= explode(' ', trim($_SESSION['loggedInUser']['name']))[0]; ?>
-                        </a>
-                        <a href="logout.php" style="font-size: 12px; color: #666;">(Logout)</a>
+                            <span class="profile-name"><?= explode(' ', trim($_SESSION['loggedInUser']['name']))[0]; ?></span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <a href="profile.php" class="profile-menu-item">
+                                <i class="fa-solid fa-user-circle"></i> My Profile
+                            </a>
+                            <a href="settings.php" class="profile-menu-item">
+                                <i class="fa-solid fa-gear"></i> Settings
+                            </a>
+                            <a href="orders.php" class="profile-menu-item">
+                                <i class="fa-solid fa-receipt"></i> My Orders
+                            </a>
+                            <a href="wishlist.php" class="profile-menu-item">
+                                <i class="fa-solid fa-heart"></i> Wishlist
+                            </a>
+                            <div class="profile-menu-divider"></div>
+                            <a href="logout.php" class="profile-menu-item logout-item">
+                                <i class="fa-solid fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
                     </div>
                 <?php else: ?>
                     <a href="login.php"><i class="fa-solid fa-user"></i></a>
