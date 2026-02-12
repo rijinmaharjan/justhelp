@@ -1,5 +1,13 @@
 <?php
 $pageTitle = "index";
+require 'config/dbcon.php'; 
+session_start();
+
+// If user is already logged in, skip the login page
+if(isset($_SESSION['auth_user'])) {
+    header("Location: dashboard.php");
+    exit();
+}
 include('includes/header.php'); ?>
 <!-- features-->
 <section id="feature" class="section-p1">
