@@ -105,10 +105,14 @@ p a:hover {
         margin-bottom: 20px;
 }
 
-/* ----- Profile Dropdown Menu ----- */
+/* ----- Profile Dropdown Menu (CSS-only with checkbox) ----- */
 .profile-menu-container {
     position: relative;
     display: inline-block;
+}
+
+.profile-toggle-checkbox {
+    display: none;
 }
 
 .profile-btn {
@@ -134,17 +138,17 @@ p a:hover {
     border-color: #7a1e2c;
 }
 
-.profile-btn.active {
-    background: #7a1e2c;
-    color: #fff;
-}
-
 .profile-btn i.fa-chevron-down {
     font-size: 12px;
     transition: transform 0.3s ease;
 }
 
-.profile-btn.active i.fa-chevron-down {
+.profile-toggle-checkbox:checked + .profile-btn {
+    background: #7a1e2c;
+    color: #fff;
+}
+
+.profile-toggle-checkbox:checked + .profile-btn i.fa-chevron-down {
     transform: rotate(180deg);
 }
 
@@ -161,11 +165,11 @@ p a:hover {
     z-index: 1000;
     margin-top: 8px;
     overflow: hidden;
+    animation: slideDown 0.3s ease;
 }
 
-.profile-dropdown.active {
+.profile-toggle-checkbox:checked ~ .profile-dropdown {
     display: block;
-    animation: slideDown 0.3s ease;
 }
 
 @keyframes slideDown {

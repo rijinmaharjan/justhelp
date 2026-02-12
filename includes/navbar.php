@@ -69,12 +69,13 @@
             <li>
                 <?php if (isset($_SESSION['auth'])): ?>
                     <div class="profile-menu-container">
-                        <button class="profile-btn" id="profileBtn">
+                        <input type="checkbox" id="profileToggle" class="profile-toggle-checkbox">
+                        <label for="profileToggle" class="profile-btn">
                             <i class="fa-solid fa-user"></i>
                             <span class="profile-name"><?= explode(' ', trim($_SESSION['loggedInUser']['name']))[0]; ?></span>
                             <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                        <div class="profile-dropdown" id="profileDropdown">
+                        </label>
+                        <div class="profile-dropdown">
                             <a href="profile.php" class="profile-menu-item">
                                 <i class="fa-solid fa-user-circle"></i> My Profile
                             </a>
