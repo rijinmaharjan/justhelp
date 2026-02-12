@@ -1,14 +1,20 @@
 <?php
 $pageTitle = "index";
-require 'config/dbcon.php'; 
-session_start();
+include('includes/header.php');
 
-// If user is already logged in, skip the login page
-if(isset($_SESSION['auth_user'])) {
-    header("Location: dashboard.php");
-    exit();
+$sortBy = $_GET['sort'] ?? '';
+$rawSearch = trim($_GET['search'] ?? '');
+$searchTerm = mysqli_real_escape_string($conn, $rawSearch);
+$whereParts = ["status='0'"];
+
+if ($searchTerm !== '') {
+    $whereParts[] = "(name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%' OR size LIKE '%$searchTerm%')";
 }
-include('includes/header.php'); ?>
+
+$orderBy = $sortBy === 'new' ? " ORDER BY id DESC" : " ORDER BY id ASC";
+$productQuery = "SELECT * FROM products WHERE " . implode(' AND ', $whereParts) . $orderBy;
+$result = mysqli_query($conn, $productQuery);
+?>
 <!-- features-->
 <section id="feature" class="section-p1">
     <h2>Featured Product</h2>
@@ -17,19 +23,22 @@ include('includes/header.php'); ?>
 
 <div class="py-5 bg-light">
     <div class="container">
+
+        <?php if ($rawSearch !== ''): ?>
+            <div class="search-result-bar">
+                <p>
+                    Showing results for: <strong><?= htmlspecialchars($rawSearch); ?></strong>
+                    <?php if ($sortBy === 'new'): ?>
+                        <span class="search-tag">Sorted: Newest</span>
+                    <?php endif; ?>
+                </p>
+                <a href="index.php" class="btn btn-sm btn-outline-secondary">Clear Filters</a>
+            </div>
+        <?php endif; ?>
+
         <div class="row">
 
             <?php
-            $sortBy = $_GET['sort'] ?? '';
-            $orderBy = "";
-
-            if ($sortBy === 'new') {
-                $orderBy = " ORDER BY id DESC";
-            }
-
-            $productQuery = "SELECT * FROM products WHERE status='0'" . $orderBy;
-            $result = mysqli_query($conn, $productQuery);
-
             if ($result) {
                 if (mysqli_num_rows($result) > 0) {
 
@@ -47,9 +56,7 @@ include('includes/header.php'); ?>
 
                                 <div class="card-body">
                                     <h5><?= $row['name']; ?></h5>
-                                    <p>
-                                        <?= $row['price']; ?>
-                                    </p>
+                                    <p>₹<?= $row['price']; ?></p>
                                     <div>
                                         <a href="product-detail.php?id=<?= $row['id']; ?>" class="btn add-cart-btn">
                                             View Product
@@ -63,7 +70,7 @@ include('includes/header.php'); ?>
                 } else {
                     ?>
                     <div class="col-md-12">
-                        <h5>No record Found</h5>
+                        <h5>No products found<?= $rawSearch !== '' ? " for \"" . htmlspecialchars($rawSearch) . "\"" : ''; ?>.</h5>
                     </div>
                     <?php
                 }

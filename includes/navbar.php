@@ -10,10 +10,16 @@
             <li><a href="index.php?sort=new">New Arrivals</a></li>
             <li><a href="#">Seasonal</a></li>
             <li>
-                <div class="box">
-                    <input type="text" placeholder="Search...">
-                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                </div>
+                <form class="nav-search-form" action="index.php" method="GET">
+                    <input type="text" name="search" placeholder="Search products..."
+                        value="<?= htmlspecialchars($_GET['search'] ?? ''); ?>">
+                    <?php if (!empty($_GET['sort']) && $_GET['sort'] === 'new'): ?>
+                        <input type="hidden" name="sort" value="new">
+                    <?php endif; ?>
+                    <button type="submit" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
             </li>
 
             <li>
