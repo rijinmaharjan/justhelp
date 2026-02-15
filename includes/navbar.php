@@ -54,6 +54,7 @@
                             <i class="fa-solid fa-chevron-down profile-chevron"></i>
                         </button>
                         <div class="profile-dropdown-menu">
+                            <a href="my-orders.php">My Orders</a>
                             <a href="account-settings.php">Settings</a>
                             <a href="logout.php">Logout</a>
                         </div>
