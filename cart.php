@@ -1,7 +1,6 @@
 <?php
 include('includes/header.php');
 
-// Check the correct session key
 if (!isset($_SESSION['loggedInUser'])) {
     echo "<div class='container mt-5 text-center'>
             <h4>Please <a href='login.php'>Login</a> to view your cart items.</h4>
@@ -10,16 +9,15 @@ if (!isset($_SESSION['loggedInUser'])) {
     exit();
 }
 
-// Get user_id from the correct session key
 $userId = $_SESSION['loggedInUser']['user_id'];
 
-// SQL JOIN to combine cart and product data
-$query = "SELECT c.id as cart_id, c.size, c.quantity, p.name, p.price, p.image 
-          FROM cart c 
-          INNER JOIN products p ON c.product_id = p.id 
+$query = "SELECT c.id as cart_id, c.size, c.quantity, p.name, p.price, p.image
+          FROM cart c
+          INNER JOIN products p ON c.product_id = p.id
           WHERE c.user_id = '$userId'";
 
 $queryRun = mysqli_query($conn, $query);
+$grandTotal = 0;
 ?>
 
 <div class="container mt-5">
@@ -36,8 +34,10 @@ $queryRun = mysqli_query($conn, $query);
                 </tr>
             </thead>
             <tbody>
-                <?php if (mysqli_num_rows($queryRun) > 0): ?>
+                <?php if ($queryRun && mysqli_num_rows($queryRun) > 0): ?>
                     <?php while ($item = mysqli_fetch_assoc($queryRun)): ?>
+                        <?php $itemTotal = $item['price'] * $item['quantity'];
+                        $grandTotal += $itemTotal; ?>
                         <tr>
                             <td>
                                 <img src="<?= $item['image']; ?>" width="60px" class="rounded me-2" alt="">
@@ -45,12 +45,17 @@ $queryRun = mysqli_query($conn, $query);
                             </td>
                             <td>₹<?= $item['price']; ?></td>
                             <td><?= $item['quantity']; ?></td>
-                            <td>₹<?= $item['price'] * $item['quantity']; ?></td>
+                            <td>₹<?= $itemTotal; ?></td>
                             <td>
-                                <button class="btn btn-danger btn-sm">Remove</button>
+                                <button class="btn btn-danger btn-sm" disabled>Remove</button>
                             </td>
                         </tr>
                     <?php endwhile; ?>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Grand Total</strong></td>
+                        <td><strong>₹<?= $grandTotal; ?></strong></td>
+                        <td></td>
+                    </tr>
                 <?php else: ?>
                     <tr>
                         <td colspan="5" class="text-center">Your cart is empty.</td>
@@ -59,6 +64,12 @@ $queryRun = mysqli_query($conn, $query);
             </tbody>
         </table>
     </div>
+
+    <?php if ($grandTotal > 0): ?>
+        <div class="d-flex justify-content-end mt-3">
+            <a href="checkout.php" class="btn add-cart-btn">Proceed to Checkout</a>
+        </div>
+    <?php endif; ?>
 </div>
 
 <?php include('includes/footer.php'); ?>

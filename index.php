@@ -15,13 +15,14 @@ $orderBy = $sortBy === 'new' ? " ORDER BY id DESC" : " ORDER BY id ASC";
 $productQuery = "SELECT * FROM products WHERE " . implode(' AND ', $whereParts) . $orderBy;
 $result = mysqli_query($conn, $productQuery);
 ?>
-<!-- features-->
-<section id="feature" class="section-p1">
-    <h2>Featured Product</h2>
-    <p>Summer Collection New Morden Design</p>
+<!-- top dashboard intro -->
+<section class="store-hero section-p1">
+    <h1>New Era Fashion Store</h1>
+    <p>Scroll down to explore all products, latest arrivals, and trending styles.</p>
+    <a href="#all-products" class="btn add-cart-btn">Browse Products</a>
 </section>
 
-<div class="py-5 bg-light">
+<div class="py-5 bg-light" id="all-products">
     <div class="container">
 
         <?php if ($rawSearch !== ''): ?>
