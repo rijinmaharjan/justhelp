@@ -1,7 +1,9 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-require 'dbcon.php';
+require_once 'dbcon.php';
 
 function validate($inputData)
 {

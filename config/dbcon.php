@@ -1,11 +1,16 @@
 <?php
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_DATABASE', 'clothing');
+if (!defined('DB_SERVER')) {
+    define('DB_SERVER', 'localhost');
+    define('DB_USERNAME', 'root');
+    define('DB_PASSWORD', '123123');
+    define('DB_DATABASE', 'clothing');
+    define('DB_PORT', 3307);
+}
+// define('DB_PORT', 3307);
 
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+// STEP 1: Connect to the server ONLY (Notice the 4th parameter is empty "")
+$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, "", DB_PORT);
 
 if (!$conn) {
     die('Connection Failed: ' . mysqli_connect_error());
@@ -55,27 +60,7 @@ $createCartTable = "CREATE TABLE IF NOT EXISTS cart (
     CONSTRAINT fk_cart_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
-$createOrdersTable = "CREATE TABLE IF NOT EXISTS orders (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    full_name VARCHAR(191) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    email VARCHAR(191) NOT NULL,
-    address_line1 VARCHAR(255) NOT NULL,
-    address_line2 VARCHAR(255) DEFAULT NULL,
-    city VARCHAR(120) NOT NULL,
-    state VARCHAR(120) NOT NULL,
-    pincode VARCHAR(12) NOT NULL,
-    payment_method VARCHAR(50) NOT NULL DEFAULT 'cod',
-    total_amount DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-    order_items LONGTEXT NOT NULL,
-    order_status VARCHAR(60) NOT NULL DEFAULT 'Placed',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_orders_user_id (user_id),
-    CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
-
-$schemaQueries = [$createUsersTable, $createProductsTable, $createCartTable, $createOrdersTable];
+$schemaQueries = [$createUsersTable, $createProductsTable, $createCartTable];
 
 foreach ($schemaQueries as $query) {
     if (!mysqli_query($conn, $query)) {
