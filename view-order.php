@@ -7,6 +7,7 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['loggedInUser']['user_id'])) {
 }
 
 $userId = (int) $_SESSION['loggedInUser']['user_id'];
+ensureOrdersTableExists($conn);
 $orderId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 if ($orderId <= 0) {

@@ -7,6 +7,7 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['loggedInUser']['user_id'])) {
 }
 
 $userId = (int) $_SESSION['loggedInUser']['user_id'];
+ensureOrdersTableExists($conn);
 $orderQuery = "SELECT * FROM orders WHERE user_id = '$userId' ORDER BY id DESC";
 $orderRun = mysqli_query($conn, $orderQuery);
 ?>

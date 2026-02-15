@@ -7,6 +7,8 @@ if (!isset($_SESSION['loggedInUser'])) {
 
 $userId = (int) $_SESSION['loggedInUser']['user_id'];
 
+ensureOrdersTableExists($conn);
+
 $cartQuery = "SELECT c.product_id, c.quantity, c.size, p.name, p.price
               FROM cart c
               INNER JOIN products p ON c.product_id = p.id
